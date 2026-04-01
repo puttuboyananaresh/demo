@@ -1,0 +1,26 @@
+---
+- name: Demo playbook for localhost in AAP execution environment
+  hosts: localhost
+  gather_facts: true
+
+  tasks:
+    - name: Show execution context
+      ansible.builtin.debug:
+        msg:
+          - "Inventory host: {{ inventory_hostname }}"
+          - "Connection type: {{ ansible_connection }}"
+          - "Hostname inside execution environment: {{ ansible_hostname }}"
+          - "FQDN inside execution environment: {{ ansible_fqdn | default('not set') }}"
+          - "Default IPv4 address: {{ ansible_default_ipv4.address | default('not available') }}"
+          - "All IPv4 addresses: {{ ansible_all_ipv4_addresses | default([]) }}"
+          - "Operating system: {{ ansible_distribution }} {{ ansible_distribution_version }}"
+          - "Kernel: {{ ansible_kernel }}"
+          - "Python: {{ ansible_python_version }}"
+
+    - name: Display a clean demo summary
+      ansible.builtin.debug:
+        msg: |
+          AAP demo successful.
+          This job ran on host '{{ inventory_hostname }}'
+          using local connection inside the execution environment container.
+          Container/pod IP: {{ ansible_default_ipv4.address | default('not available') }}
