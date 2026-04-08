@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: NAMESPACE_NAME
+  labels:
+    environment: ENVIRONMENT
+    managed-by: gitops
+    team: TEAM_NAME
+  annotations:
+    description: "Managed namespace - do not edit manually"
